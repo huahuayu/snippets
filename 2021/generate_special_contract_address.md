@@ -57,4 +57,5 @@ How to depoly a contract with address have leading zeros like: `0x00000000` ?
 3. call `getCreationBytecode` get bytecode of `Foo` contract
 4. deploy `AddressFinder` contract
 5. call `AddressFinder.getAddress` by pass factory address and `Foo` bytecode, and give a random `salt`, you will get an address in return.
-6. use the same `salt` call `Factory.deploy`, you will get a `Foo` contract deployed in the same address you got at step5.
+6. use the same `salt` call `Factory.deploy`, you will get a `Foo` contract deployed in the same address you got at step5. Magic!
+7. repeat step5, with other random `salt`, until find an address you like.
