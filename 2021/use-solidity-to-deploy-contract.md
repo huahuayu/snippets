@@ -22,4 +22,8 @@ contract Deploy {
 
 ## Context
 
-salt must be byte32，if use remix to pass the salt, it is looks like `0x81ab92dd3a944ae29ec86e46c4e891b3ef3078f446cd88c56edd342542c3a8cc`
+Salt must be byte32，if use remix to pass the salt, it is looks like
+
+`0x81ab92dd3a944ae29ec86e46c4e891b3ef3078f446cd88c56edd342542c3a8cc`
+
+By use this method, you can deploy `Foo` contract with a specific address, for example address with leading zeros `0x0000000`.

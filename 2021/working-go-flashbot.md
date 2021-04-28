@@ -44,5 +44,3 @@ func (h *FlashbotsTransport) RoundTrip(request *http.Request) (*http.Response, e
     return h.r.RoundTrip(request)
 }
 ```
-
-## context
