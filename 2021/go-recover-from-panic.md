@@ -6,13 +6,11 @@
 [//updatetime]: (20210618)
 
 ```go
-defer func() {
-	if r := recover(); r != nil {
-		logrus.Error("recovered from panic: ", r)
-  		// 0-PanicLevel 1-FatalLevel 2-ErrorLevel 3-WarnLevel 4-InfoLevel 5-DebugLevel 6-TraceLevel
-		if logrus.GetLevel().String() == "5"{
-			fmt.Println("debug trace:\n" + string(debug.Stack()))
-		}
-	}
-}()
+			go func(txHash common.Hash) {
+				defer func() {
+					if r := recover(); r != nil {
+						logrus.Error("recovered from panic: ", r)
+						logrus.Debug(string(debug.Stack()))
+					}
+				}())
 ```
