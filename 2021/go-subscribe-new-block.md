@@ -1,9 +1,9 @@
-[//title]: (subscribe-new-block)
-[//englishtitle]: (subscribe-new-block)
+[//title]: (go-subscribe-new-block)
+[//englishtitle]: (go-subscribe-new-block)
 [//category]: (go,ethereum,snippet)
 [//tags]: (go,ethereum,snippet)
-[//createtime]: (20210524)
-[//updatetime]: (20210524)
+[//createtime]: (20210622)
+[//updatetime]: (20210622)
 
 ```go
 func TestSubscribeNewBlock(t *testing.T) {
