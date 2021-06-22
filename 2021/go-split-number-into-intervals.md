@@ -1,3 +1,10 @@
+[//title]: (go-split-number-into-intervals)
+[//englishtitle]: (go-split-number-into-intervals)
+[//category]: (go,snippet)
+[//tags]: (go,goroutine,snippet)
+[//createtime]: (20210622)
+[//updatetime]: (20210622)
+
 ```go
 func toIntervals(number int64, interval int64) (intervals [][2]int64, err error) {
 	if !(number >= 1 && interval > 0) {
@@ -34,4 +41,4 @@ func TestToIntervals(t *testing.T) {
 
 ## context
 
-split number to intervals for each go routine to parallel process
+split number to intervals for each go routine to parallel process part of job
