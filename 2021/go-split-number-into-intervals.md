@@ -49,10 +49,10 @@ if with a start point in the middle
 
 ```go
 func toIntervals(number int64, start int64, interval int64) (intervals [][2]int64, err error) {
-	if !(number > 0 && interval > 0 && start <= number) {
+	if !(number > 0 && interval > 0 && start < number) {
 		return nil, errors.New("invalid input")
 	}
-	if number == start {
+	if start == number {
 		return [][2]int64{}, nil
 	}
 	var (
@@ -68,8 +68,7 @@ func toIntervals(number int64, start int64, interval int64) (intervals [][2]int6
 		prev = next + 1
 		next = next + interval
 		if next >= max {
-			next = max
-			intervals = append(intervals, [2]int64{prev, next})
+			intervals = append(intervals, [2]int64{prev, max})
 			break
 		}
 	}
