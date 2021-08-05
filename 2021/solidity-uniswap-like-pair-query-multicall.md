@@ -3,7 +3,7 @@
 [//category]: (solidity,snippet,ethereum)
 [//tags]: (solidity,snippet,uniswap,multicall)
 [//createtime]: (20210623)
-[//updatetime]: (20210623)
+[//updatetime]: (20210805)
 
 ```solidity
 //SPDX-License-Identifier: MIT
@@ -71,4 +71,7 @@ contract PairQuery {
 
 ## context
 
-depolyed at: https://bscscan.com/address/0x7bD13ece4326F463A45ad6a82d82e33611389765
+depolyed at:
+https://etherscan.io/address/0x80Ddf6DeC02a0958E3e2629892f7b3015829Bb73  
+https://bscscan.com/address/0x7bD13ece4326F463A45ad6a82d82e33611389765  
+https://polygonscan.com/address/0x737e30A607Be32c38C64a0F751825D7a70A861c6
