@@ -6,25 +6,31 @@
 [//updatetime]: (20210623)
 
 ```go
-func toIntervals(number int64, interval int64) (intervals [][2]int64, err error) {
-	if !(number >= 1 && interval > 0) {
+package util
+
+import "errors"
+
+func ToIntervals(number int64, start int64, interval int64) (intervals [][2]int64, err error) {
+	if !(number > 0 && interval > 0 && start < number) {
 		return nil, errors.New("invalid input")
 	}
-	if number <= interval {
-		return [][2]int64{{0, number - 1}}, nil
+	if start == number {
+		return [][2]int64{}, nil
 	}
 	var (
-		prev int64 = 0
-		next       = interval - 1
-		max        = number - 1
+		prev = start
+		next = start + interval - 1
+		max  = number - 1
 	)
+	if next > max {
+		return [][2]int64{{prev, max}}, nil
+	}
 	for {
 		intervals = append(intervals, [2]int64{prev, next})
 		prev = next + 1
 		next = next + interval
 		if next >= max {
-			next = max
-			intervals = append(intervals, [2]int64{prev, next})
+			intervals = append(intervals, [2]int64{prev, max})
 			break
 		}
 	}
