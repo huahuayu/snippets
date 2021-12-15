@@ -3,7 +3,7 @@
 [//category]: (go,snippet)
 [//tags]: (go,goroutine,snippet)
 [//createtime]: (20210622)
-[//updatetime]: (20210623)
+[//updatetime]: (20211215)
 
 ```go
 package util
