@@ -1,13 +1,13 @@
-[//title]: (go-sync-once)
-[//englishtitle]: (go-sync-once)
+[//title]: (go-sync-once-by-example)
+[//englishtitle]: (go-sync-once-by-example)
 [//category]: (go,concurrent-programming,snippet)
 [//tags]: (go,snippet,concurrent-programming)
 [//createtime]: (20220329)
-[//updatetime]: (20220329)
+[//updatetime]: (20220330)
 
-`sync.once` ensure the anonymous function execute only once, and before execution finished, it will block all the other goroutines.
+`sync.Once` ensure the anonymous function execute only once, and before execution finished, it will block all the other goroutines.
 
-`sync.once` is singleton pattern, it can be used to initialize config / singleton instance.
+`sync.Once` is singleton pattern, it can be used to initialize config / singleton instance.
 
 ```go
 func TestSyncOnce(t *testing.T) {
