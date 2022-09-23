@@ -3,90 +3,37 @@
 [//category]: (go,snippet)
 [//tags]: (go,goroutine,snippet)
 [//createtime]: (20210622)
-[//updatetime]: (20211215)
+[//updatetime]: (20220923)
+
+Split number into intervals, so that each go routine can concurrent process part of the job.
 
 ```go
-package util
-
-import "errors"
-
-func ToIntervals(number int64, start int64, interval int64) (intervals [][2]int64, err error) {
-	if !(number > 0 && interval > 0 && start < number) {
-		return nil, errors.New("invalid input")
+func ToIntervals(start int64, end int64, interval int64) (intervals [][2]int64, err error) {
+	if start > end {
+		return nil, errors.New(fmt.Sprintf("invalid input %d %d %d, start > end", start, end, interval))
 	}
-	if start == number {
-		return [][2]int64{}, nil
+	if interval < 0 {
+		return nil, errors.New(fmt.Sprintf("invalid input %d %d %d, interval <= 0", start, end, interval))
 	}
-	var (
-		prev = start
-		next = start + interval - 1
-		max  = number - 1
-	)
-	if next > max {
-		return [][2]int64{{prev, max}}, nil
+	if interval == 0 || interval > end-start {
+		return [][2]int64{{start, end}}, nil
 	}
-	for {
-		intervals = append(intervals, [2]int64{prev, next})
-		prev = next + 1
-		next = next + interval
-		if next >= max {
-			intervals = append(intervals, [2]int64{prev, max})
+	for i := start; i <= end; i += interval {
+		if i+interval-1 > end {
+			intervals = append(intervals, [2]int64{i, end})
 			break
 		}
+		intervals = append(intervals, [2]int64{i, i + interval - 1})
 	}
 	return intervals, nil
 }
 ```
 
-test
+Test
 
 ```go
 func TestToIntervals(t *testing.T) {
-	intervals ,err:= toIntervals(10, 3)
-	fmt.Println(intervals,err) // [[0 2] [3 5] [6 8] [9 9]] <nil>
-}
-```
-
-## context
-
-split number to intervals for each go routine to parallel process part of job
-
-if with a start point in the middle
-
-```go
-func toIntervals(number int64, start int64, interval int64) (intervals [][2]int64, err error) {
-	if !(number > 0 && interval > 0 && start < number) {
-		return nil, errors.New("invalid input")
-	}
-	if start == number {
-		return [][2]int64{}, nil
-	}
-	var (
-		prev = start
-		next = start + interval - 1
-		max  = number - 1
-	)
-	if next > max {
-		return [][2]int64{{prev, max}}, nil
-	}
-	for {
-		intervals = append(intervals, [2]int64{prev, next})
-		prev = next + 1
-		next = next + interval
-		if next >= max {
-			intervals = append(intervals, [2]int64{prev, max})
-			break
-		}
-	}
-	return intervals, nil
-}
-```
-
-test
-
-```go
-func TestToIntervals(t *testing.T) {
-	intervals ,err:= toIntervals(10, 3, 3)
-	fmt.Println(intervals,err) // [[3 5] [6 8] [9 9]] <nil>
+	intervals, err := ToIntervals(0, 10, 3)
+	t.Log(intervals, err) // [[0 2] [3 5] [6 8] [9 10]]
 }
 ```
