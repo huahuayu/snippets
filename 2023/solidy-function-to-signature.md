@@ -3,9 +3,11 @@
 [//category]: (snippet,go,solidity)
 [//tags]: (go,snippet,solidity,signature)
 [//createtime]: (20230202)
-[//updatetime]: (20230202)
+[//updatetime]: (20230206)
 
 Give any solidity function like `transfer(address to, uint256 value) returns(bool)` convert it to `0xa9059cbb` .
+
+In golang:
 
 ```go
 func fnToSig(fn string) (string, error) {
@@ -60,4 +62,16 @@ func toNormalized(fn string) (string, error) {
 	normalized := fmt.Sprintf("%s(%s)", fnName, strings.Join(paramTypes, ","))
 	return normalized, nil
 }
+```
+
+It's interesting that solidity can return it's selector by itself(refer https://etherscan.io/address/0xef1c6e67703c7bd7107eed8303fbe6ec2554bf6b#code Callbacks.sol).
+
+```solidity
+    function onERC1155BatchReceived(address, address, uint256[] calldata, uint256[] calldata, bytes calldata)
+        external
+        pure
+        returns (bytes4)
+    {
+        return this.onERC1155BatchReceived.selector;
+    }
 ```
